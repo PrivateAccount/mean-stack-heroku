@@ -7,3 +7,4 @@
 * Contact form.
 * Admin Panel and managing of Gallery, Subpages, Contact Messages, App Configuration.
 * Page visits reports.
+* On-Line: https://mean-stack-web.herokuapp.com/
