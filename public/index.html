@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+
+<html ng-app="mainApp">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="MEAN Stack Application. Using MongoDB, Express.js, Angular and Node.js together.">
+	<meta name="keywords" content="mean stack, mongodb, express.js, angular, node.js, demo application">
+	<title>MEAN Stack SimpleCMS running on Heroku platform</title>
+	<link href="bootstrap.min.css" rel="stylesheet">
+	<link href="font-awesome.min.css" rel="stylesheet">
+	<link href="app.css" rel="stylesheet">
+	<link href="favicon.png" rel="shortcut icon" type="image/png">
+	<script src="jquery.min.js"></script>
+	<script src="bootstrap.bundle.min.js"></script>
+	<script src="angular.min.js"></script>
+	<script src="angular-sanitize.js"></script>
+	<script src="app.js"></script>
+	<script src="auth.js"></script>
+	<script src="pages.js"></script>
+	<script src="users.js"></script>
+	<script src="messages.js"></script>
+	<script src="images.js"></script>
+	<script src="settings.js"></script>
+	<script src="visitors.js"></script>
+	<script src="backup.js"></script>
+	<script src="todos.js"></script>
+	<script src="custom.js"></script>
+</head>
+
+<body ng-controller="mainController">
+
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+		<div class="container">
+			<a class="navbar-brand" href="#home" ng-click="getHome()"><img id="page-logo" src="logo.png" alt="MEAN Stack Application"></a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarResponsive">
+				<ul class="navbar-nav ml-auto">
+					<li ng-if="!currentUser.isLogged" class="nav-item">
+						<a class="nav-link" href="#login" ng-click="getLogin()">Zaloguj</a>
+					</li>
+					<li ng-if="currentUser.isLogged" class="nav-item">
+						<a class="nav-link" href="#panel" ng-click="getPanel()">Dashboard</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#demo" ng-click="getAppTodos()">Demo</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#manual" ng-click="getManual()">Instrukcja</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#contact" ng-click="getContact()">Kontakt</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<header class="bg-white">
+		<div class="container text-center">
+			<div ng-if="settings['header_enabled'].value != 'true'">
+				<div class="main-nav">
+					<a class="main-link" href="http://mycms.pl" target="_blank">MyCMS</a>
+					<a class="main-link" href="http://angular-cms.pl" target="_blank">AngularCMS</a>
+					<a class="main-link" href="http://metodycznie.pl" target="_blank">Metodycznie.pl</a>
+					<a class="main-link" href="https://github.com/andrzuk" target="_blank">GitHub</a>
+				</div>
+			</div>
+			<div ng-if="settings['header_enabled'].value == 'true'">
+				<div ng-bind-html="settings['header_content'].value"></div>
+			</div>
+		</div>
+	</header>
+
+	<section id="main-content">
+		<div ng-include="layout.home"></div>
+		<div ng-include="layout.manual"></div>
+		<div ng-include="layout.contact"></div>
+		<div ng-include="layout.auth"></div>
+		<div ng-include="layout.pages"></div>
+		<div ng-include="layout.users"></div>
+		<div ng-include="layout.messages"></div>
+		<div ng-include="layout.images"></div>
+		<div ng-include="layout.settings"></div>
+		<div ng-include="layout.visitors"></div>
+		<div ng-include="layout.backup"></div>
+		<div ng-include="layout.todos"></div>
+	</section>
+	
+	<footer class="bg-dark">
+		<div class="container">
+			<div ng-if="settings['footer_enabled'].value != 'true'">
+				<p class="text-center">Copyright &copy; 2018 <a href="http://angular-cms.pl/category/11" target="_blank">Andrzej Żukowski</a></p>
+			</div>
+			<div ng-if="settings['footer_enabled'].value == 'true'">
+				<div ng-bind-html="settings['footer_content'].value"></div>
+			</div>
+		</div>
+	</footer>
+	
+	<div ng-bind-html="pageData.general_styles"></div>
+	<div ng-bind-html="pageData.general_scripts"></div>
+	
+</body>
+
+</html>
